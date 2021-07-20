@@ -1,17 +1,16 @@
 'use strict';
-const menuLink = document.querySelectorAll('.menu__link');
-const menuSub = document.querySelectorAll('.menu_sub');
+const link = Array.from(document.querySelectorAll('.menu__link'));
 
-for (let i = 0; i < menuLink.length; i++) {
-  menuLink[i].onclick = function () {
-    close();
-    menuLink[i].closest("li").querySelector('.menu_sub').classList.toggle('menu_active');
-    return false;
+function handler() {
+  if (document.querySelector('.menu_active') != null && this.nextElementSibling == null) {
+    document.querySelector('.menu_active').classList.remove('menu_active');
+  }
+  if (this.nextElementSibling != null) {
+    this.nextElementSibling.classList.toggle('menu_active');
+    event.preventDefault();
   }
 }
 
-const close = () => {
-  if (menuSub.classList.contains('menu_active')) {
-    menuSub.classList.remove('menu_active');
-  }
-}
+link.forEach((b) => {
+  b.addEventListener('click', handler)
+});
